@@ -30,6 +30,9 @@ import image2 from "../../assets/images/temp/banner2.jpg";
 
 import LogoHorizontal from '../../assets/images/logos/logo-horizontal.svg';
 
+import TextField from '@material-ui/core/TextField';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
@@ -81,6 +84,20 @@ export default function LoginPage(props) {
   
   const { ...rest } = props;
 
+  const top100Films = [
+    { title: 'The Shawshank Redemption', year: 1994 },
+    { title: 'The Godfather', year: 1972 },
+    { title: 'The Godfather: Part II', year: 1974 },
+    { title: 'The Dark Knight', year: 2008 },
+    { title: '12 Angry Men', year: 1957 },
+    { title: "Schindler's List", year: 1993 }
+  ];
+
+  const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: (option) => option.title,
+  });
+
   return (
     <div>
       <ToastContainer />
@@ -101,37 +118,71 @@ export default function LoginPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
+            <GridContainer justify="space-between">
+                <GridItem xs={12} sm={12} md={4}>
+                  <Autocomplete
+                      id="filter-demo"
+                      options={top100Films}
+                      getOptionLabel={(option) => option.title}
+                      filterOptions={filterOptions}
+                      style={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Custom filter" variant="outlined" />}
+                    />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Autocomplete
+                      id="combo-box-demo"
+                      options={top100Films}
+                      getOptionLabel={(option) => option.title}
+                      style={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Autocomplete
+                      id="combo-box-demo"
+                      options={top100Films}
+                      getOptionLabel={(option) => option.title}
+                      style={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    />
+                </GridItem>
+            </GridContainer>
             <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={12}>
-              <Card>
-                <Carousel {...settings}>
-                  <div>
-                    <img
-                      src={image1}
-                      alt="First slide"
-                      className="slick-image"
-                    />
-                  </div>
-                  <div>
-                    <img
-                      src={image2}
-                      alt="Second slide"
-                      className="slick-image"
-                    />
-                  </div>
-                </Carousel>
-              </Card>
-            </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={4}>
                 <CardShelf img={s1} title="LRO Cabelo Estética" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={4}>
                 <CardShelf img={s2} title="Atelier Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={4}>
                 <CardShelf img={s3} title="Jacques Janine Sorocaba" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s1} title="LRO Cabelo Estética" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s2} title="Atelier Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s3} title="Jacques Janine Sorocaba" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
                 <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
             </GridContainer>

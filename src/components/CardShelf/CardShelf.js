@@ -2,17 +2,13 @@ import React from "react";
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Card from "../Card/Card.js";
-import CardBody from "../Card/CardBody.js";
 import Button from "../CustomButtons/Button.js";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
-import Close from "@material-ui/icons/Close";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,21 +21,63 @@ import imagesStyles from "../../assets/jss/material-kit-react/imagesStyles.js";
 
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import InfoIcon from '@material-ui/icons/Info';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { cardTitle } from "../../assets/jss/material-kit-react.js";
 
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
 import GoogleMap from 'google-map-react';
 
-const styles = {
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+const useStyles = makeStyles((theme) => ({
   ...imagesStyles,
   cardTitle,
   modalMap: {
-    height: 400
-  }
-};
+    height: 500
+  },
+  modalDivider: {
+    marginTop: 30,
+    marginBottom: 15,
+    border: '1px solid #ccc'
+  },
+  root: {
+    maxWidth: 345,
+    marginBottom: 15
+  },
+  media: {
+    height: 150,
+    paddingTop: '56.25%', // 16:9
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+}));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -57,9 +95,6 @@ const rows = [
   createData('Depilacao parcial', 'R$ 80.00', '1.5h')
 ];
 
-const useStyles = makeStyles(styles);
-
-
 function Marker({ text }) {
 	return (
 		<Tooltip title={text} placement="top">
@@ -70,49 +105,79 @@ function Marker({ text }) {
 
 export default function Cards(props) {
   const [modal, setModal] = React.useState(false);
+
   const { img, title, description } = props;
 
   const classes = useStyles();
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <div>
-      <Card style={{width: "100%"}}>
-        <img
-          style={{height: "300px", width: "100%", display: "block"}}
-          className={classes.imgCardTop}
-          src={img}
-          alt="Card-img-cap"
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={title}
+          subheader="September 14, 2016"
         />
-        <CardBody>
-          <h4 className={classes.cardTitle}>{title}</h4>
-          <p>{description}</p>
-          <Button color="danger" onClick={() => setModal(true)}>
-            <InfoIcon/>
-            Mais informacoes
-          </Button>
-          <Button color="success">
-            <WhatsAppIcon />
-            Contato
-          </Button>
-        </CardBody>
+        <CardMedia
+          className={classes.media}
+          image={img}
+          title="Paella dish"
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton onClick={() => setModal(true)}>
+            <InfoIcon />
+          </IconButton>
+        </CardActions>
       </Card>
       <Dialog
         classes={{
           root: classes.center,
           paper: classes.modal
         }}
+        className={classes.modalFull}
         open={modal}
         TransitionComponent={Transition}
         keepMounted
         onClose={() => setModal(false)}
         aria-labelledby="modal-slide-title"
         aria-describedby="modal-slide-description"
+        fullScreen={true}
       >
         <DialogTitle
           id="classic-modal-slide-title"
           disableTypography
           className={classes.modalHeader}
         >
-          <h4 className={classes.modalTitle}>Detalhes do estabelecimento</h4>
+          <h4 className={classes.modalTitle}>
+            <AttachMoneyIcon/>
+            Servicos
+          </h4>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
@@ -140,8 +205,12 @@ export default function Cards(props) {
               </TableBody>
             </Table>
           </TableContainer>
+          <hr className={classes.modalDivider}/>
           <div className="w-full">
-            <h4 className={classes.modalTitle}>Localizacao</h4>
+            <h4 className={classes.modalTitle}>
+              <LocationOnIcon/>
+              Localizacao
+            </h4>
             <div className={classes.modalMap}>
               <GoogleMap
                 bootstrapURLKeys={{
