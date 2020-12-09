@@ -42,7 +42,6 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,15 +105,13 @@ function Marker({ text }) {
 export default function Cards(props) {
   const [modal, setModal] = React.useState(false);
 
-  const { img, title, description } = props;
+  const { img, title, description, avaliation } = props;
 
   const classes = useStyles();
 
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const hendleFirstLetterName = (name) => {
+    return name.charAt(0).toUpperCase();
+  }
 
   return (
     <div>
@@ -122,7 +119,7 @@ export default function Cards(props) {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+              {hendleFirstLetterName(title)}
             </Avatar>
           }
           action={
@@ -131,7 +128,7 @@ export default function Cards(props) {
             </IconButton>
           }
           title={title}
-          subheader="September 14, 2016"
+          subheader={avaliation}
         />
         <CardMedia
           className={classes.media}
@@ -152,6 +149,9 @@ export default function Cards(props) {
           </IconButton>
           <IconButton onClick={() => setModal(true)}>
             <InfoIcon />
+          </IconButton>
+          <IconButton>
+            <WhatsAppIcon />
           </IconButton>
         </CardActions>
       </Card>
@@ -175,14 +175,16 @@ export default function Cards(props) {
           className={classes.modalHeader}
         >
           <h4 className={classes.modalTitle}>
-            <AttachMoneyIcon/>
-            Servicos
+            Informacoes: {title}
           </h4>
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
           className={classes.modalBody}
         >
+          <h5 className={classes.modalTitle}>
+            Servicos
+          </h5>
          <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="a dense table">
               <TableHead>
@@ -207,10 +209,9 @@ export default function Cards(props) {
           </TableContainer>
           <hr className={classes.modalDivider}/>
           <div className="w-full">
-            <h4 className={classes.modalTitle}>
-              <LocationOnIcon/>
+            <h5 className={classes.modalTitle}>
               Localizacao
-            </h4>
+            </h5>
             <div className={classes.modalMap}>
               <GoogleMap
                 bootstrapURLKeys={{
