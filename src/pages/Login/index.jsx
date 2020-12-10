@@ -61,10 +61,14 @@ export default function LoginPage(props) {
      Axios.post(`${process.env.REACT_APP_API_HOST}/login`, {email, password})
       .then(response => {
         const { data } = response;
-        if(data.email === "error") {
+
+        if(!data.email) {
             toast.error("Senha inválida!!!");
             return;
         }
+
+        localStorage.setItem('userId', data.id);
+        localStorage.setItem('userName', data.name);
 
         setModal(true);
 

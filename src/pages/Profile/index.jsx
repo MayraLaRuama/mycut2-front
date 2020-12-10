@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -23,12 +24,27 @@ const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
+  
   const { ...rest } = props;
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+
+  const [data, setData] = React.useState([]);
+ 
+  React.useEffect(async () => {
+      const {data} = await handleLoadProfile();
+      setData(data);
+  }, []);
+
+  const handleLoadProfile = async () => {
+     const userId = localStorage.getItem('userId')
+     return await Axios.get(`${process.env.REACT_APP_API_HOST}/users/${userId}`);
+  }
+
   return (
     <div>
       <Header
@@ -53,15 +69,17 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Gabriel D. Padua</h3>
-                    <h6>SOROCABA - SP</h6>
+                    <h3 className={classes.title}>{data.name}</h3>
+                    <h4>{data.email}</h4>
+                    <h6>Localicacao: SOROCABA - SP</h6>
+                    <h6>Telefone: {data.phone}</h6>
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam expedita inventore iusto, atque beatae exercitationem dolor corrupti facere ab eos ea voluptatem voluptates quod dolores autem aliquam, obcaecati mollitia pariatur!{" "}
+                Bio: 
               </p>
               <br/>
               <br/>

@@ -9,7 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { AccountCircle, Done, Favorite} from "@material-ui/icons";
+import { AccountCircle, Done, Favorite, Home} from "@material-ui/icons";
 
 // core components
 import Button from "../../components/CustomButtons/Button.js";
@@ -19,17 +19,31 @@ import styles from "../../assets/jss/material-kit-react/components/headerLinksSt
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+
+  const handleName = () => {
+    return localStorage.getItem('userName') ? localStorage.getItem('userName') : 'Usuario';
+  }
+
   const classes = useStyles();
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Button
-          href="#"
+          href="/products"
           color="transparent"
           target="_blank"
           className={classes.navLink}
         >
-          Ola, Gabriel
+          Ola, {handleName()}
+        </Button>
+        <Button
+          href="/products"
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          <Home className={classes.icons} />
+          Home
         </Button>
         <Button
           href="/profile"
@@ -49,7 +63,7 @@ export default function HeaderLinks(props) {
          Completar Cadastro...
         </Button>
         <Button
-          href="#"
+          href="/favorites"
           color="transparent"
           target="_blank"
           className={classes.navLink}
