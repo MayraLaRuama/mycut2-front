@@ -23,6 +23,11 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import CustomInput from "../../components/CustomInput/CustomInput.js";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 
 import styles from "../../assets/jss/material-kit-react/views/loginPage.js";
 
@@ -31,6 +36,10 @@ import ImgBg from "../../assets/images/bg.jpg";
 import LogoHorizontal from '../../assets/images/logos/logo-horizontal.svg';
 
 const useStyles = makeStyles(styles);
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 export default function LoginPage(props) {
   
@@ -41,13 +50,15 @@ export default function LoginPage(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const [modal, setModal] = React.useState(false);
+
   const handleSubmit = () => {
      if(!email || !password) {
        toast.error('Preencha os campos para efetuar login!!!');
        return;
      }
 
-     Axios.post(`http://localhost:3000/users/login`, {email, password})
+     Axios.post(`${process.env.REACT_APP_API_HOST}/login`, {email, password})
       .then(response => {
         const { data } = response;
         if(data.email === "error") {
@@ -55,13 +66,25 @@ export default function LoginPage(props) {
             return;
         }
 
-        history.push('/shelf');
+        setModal(true);
 
       })
       .catch(error => {
         toast.error('Usuário não encontrado!!!');
         return;
       })
+  }
+
+  const handleLocation = (option) => {
+    if(option) {
+      navigator.geolocation.getCurrentPosition(setPosition);
+    }
+    setModal(false);
+    history.push('/products');
+  }
+
+  const setPosition = (position) => {
+    localStorage.setItem("localtion", position.coords.latitude);
   }
   
   setTimeout(function() {
@@ -146,6 +169,42 @@ export default function LoginPage(props) {
         </div>
         <Footer whiteFont />
       </div>
+      <Dialog
+        classes={{
+          root: classes.center,
+          paper: classes.modal
+        }}
+        open={modal}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => setModal(false)}
+        aria-labelledby="modal-slide-title"
+        aria-describedby="modal-slide-description"
+      >
+        <DialogTitle
+          id="classic-modal-slide-title"
+          disableTypography
+          className={classes.modalHeader}
+        >
+          <h4 className={classes.modalTitle}>Ativar localização</h4>
+        </DialogTitle>
+        <DialogContent
+          id="modal-slide-description"
+          className={classes.modalBody}
+        >
+          <h5>Para melhor sua experiencia, ative sua localicação para podermos recomendar estabelecimentos proximos, deseja ativar sua localicação?</h5>
+        </DialogContent>
+        <DialogActions
+          className={classes.modalFooter + " " + classes.modalFooterCenter}
+        >
+          <Button onClick={() => handleLocation(false)} color="danger">
+            Não
+          </Button>
+          <Button onClick={() => handleLocation(true)} color="success">
+            Sim
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
