@@ -21,8 +21,7 @@ import imagesStyles from "../../assets/jss/material-kit-react/imagesStyles.js";
 
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import InfoIcon from '@material-ui/icons/Info';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 
 import { cardTitle } from "../../assets/jss/material-kit-react.js";
 
@@ -43,8 +42,11 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import TextField from '@material-ui/core/TextField';
 
 import ImgDefault from '../../assets/images/temp/default.jpg';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 const useStyles = makeStyles((theme) => ({
   ...imagesStyles,
@@ -83,7 +85,12 @@ const useStyles = makeStyles((theme) => ({
   },
   favoriteButtonSelect: {
     color: 'red'
-  }
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -112,6 +119,7 @@ function Marker({ text }) {
 
 export default function Cards(props) {
   const [modal, setModal] = React.useState(false);
+  const [modalClock, setModalClock] = React.useState(false);
 
   const { img, title, description, avaliation } = props;
 
@@ -123,9 +131,14 @@ export default function Cards(props) {
     return name.charAt(0).toUpperCase();
   }
 
+  const handleClock = () => {
+    toast.success('Horario reservado com sucesso, aguarde o contato dos nosso colaborares!!!');
+    setModalClock(false);
+  }
 
   return (
     <div>
+      <ToastContainer />
       <Card className={classes.root}>
         <CardHeader
           avatar={
@@ -155,14 +168,14 @@ export default function Cards(props) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon style={{color: color}} onClick={() => setColor('red')}/>
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
           <IconButton onClick={() => setModal(true)}>
             <InfoIcon />
           </IconButton>
           <IconButton>
             <WhatsAppIcon />
+          </IconButton>
+          <IconButton onClick={() => setModalClock(true)} >
+            <QueryBuilderIcon />
           </IconButton>
         </CardActions>
       </Card>
@@ -240,6 +253,69 @@ export default function Cards(props) {
           className={classes.modalFooter + " " + classes.modalFooterCenter}
         >
           <Button onClick={() => setModal(false)} color="danger">Fechar</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        classes={{
+          root: classes.center,
+          paper: classes.modal
+        }}
+        open={modalClock}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => setModalClock(false)}
+        aria-labelledby="modal-slide-title"
+        aria-describedby="modal-slide-description"
+      >
+        <DialogTitle
+          id="classic-modal-slide-title"
+          disableTypography
+          className={classes.modalHeader}
+        >
+          <h4 className={classes.modalTitle}>Reservar Horario</h4>
+        </DialogTitle>
+        <DialogContent
+          id="modal-slide-description"
+          className={classes.modalBody}
+        >
+          <h5>Faca uma reserva de dia e horario no estabelecimento e entraram em contato para confirmar seu atendimento: </h5>
+        </DialogContent>
+        <DialogContent>
+          <TextField
+              id="date"
+              label="Selecione o Dia"
+              type="date"
+              defaultValue="2020-12-10"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+        </DialogContent>
+        <DialogContent>
+          <TextField
+              id="time"
+              label="Selecione o horario..."
+              type="time"
+              defaultValue="19:30"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+        </DialogContent>
+        <DialogActions
+          className={classes.modalFooter + " " + classes.modalFooterCenter}
+        >
+          <Button onClick={() => setModalClock(false)} color="danger">
+            Cancelar
+          </Button>
+          <Button onClick={() => handleClock()} color="success">
+            Agendar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
