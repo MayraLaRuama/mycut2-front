@@ -44,6 +44,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import ImgDefault from '../../assets/images/temp/default.jpg';
+
 const useStyles = makeStyles((theme) => ({
   ...imagesStyles,
   cardTitle,
@@ -76,6 +78,12 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  favoriteButton: {
+    color: '#ccc'
+  },
+  favoriteButtonSelect: {
+    color: 'red'
+  }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -109,9 +117,12 @@ export default function Cards(props) {
 
   const classes = useStyles();
 
+  const [color, setColor] = React.useState('#ccc');
+
   const hendleFirstLetterName = (name) => {
     return name.charAt(0).toUpperCase();
   }
+
 
   return (
     <div>
@@ -132,7 +143,7 @@ export default function Cards(props) {
         />
         <CardMedia
           className={classes.media}
-          image={img}
+          image={img ? img : ImgDefault}
           title="Paella dish"
         />
         <CardContent>
@@ -142,7 +153,7 @@ export default function Cards(props) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon style={{color: color}} onClick={() => setColor('red')}/>
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />

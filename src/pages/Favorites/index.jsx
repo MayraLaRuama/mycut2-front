@@ -25,7 +25,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
@@ -86,11 +86,11 @@ export default function FavoritePage(props) {
                                 <ListItem>
                                   <ListItemAvatar>
                                       <Avatar>
-                                      <FolderIcon />
+                                      <FavoriteIcon />
                                       </Avatar>
                                   </ListItemAvatar>
                                   <ListItemText
-                                      primary="Salao da Ana"
+                                      primary="LRO Cabelo Estética"
                                   />
                                   <ListItemSecondaryAction>
                                       <IconButton edge="end" aria-label="delete">
@@ -101,11 +101,11 @@ export default function FavoritePage(props) {
                                 <ListItem>
                                   <ListItemAvatar>
                                       <Avatar>
-                                      <FolderIcon />
+                                      <FavoriteIcon />
                                       </Avatar>
                                   </ListItemAvatar>
                                   <ListItemText
-                                      primary="Salao da Jose"
+                                      primary="Atelier Cabeleireiros"
                                   />
                                   <ListItemSecondaryAction>
                                       <IconButton edge="end" aria-label="delete">
@@ -116,11 +116,11 @@ export default function FavoritePage(props) {
                                 <ListItem>
                                   <ListItemAvatar>
                                       <Avatar>
-                                      <FolderIcon />
+                                      <FavoriteIcon />
                                       </Avatar>
                                   </ListItemAvatar>
                                   <ListItemText
-                                      primary="Salao da Joao"
+                                      primary="Jacques Janine Sorocaba"
                                   />
                                   <ListItemSecondaryAction>
                                       <IconButton edge="end" aria-label="delete">

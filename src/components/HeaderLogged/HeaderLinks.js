@@ -24,6 +24,20 @@ export default function HeaderLinks(props) {
     return localStorage.getItem('userName') ? localStorage.getItem('userName') : 'Usuario';
   }
 
+  const [complete, setData] = React.useState('');
+ 
+  React.useEffect(() => {
+      const data = handleLoadProfile();
+      setData(data ? data : '');
+
+      console.log(data);
+  }, []);
+
+  const handleLoadProfile = () => {
+     const data = localStorage.getItem('completeRegistre')
+     return data;
+  }
+
   const classes = useStyles();
   return (
     <List className={classes.list}>
@@ -53,15 +67,17 @@ export default function HeaderLinks(props) {
         >
           <AccountCircle className={classes.icons} /> Perfil
         </Button>
-        <Button
-        href="#"
-        color="transparent"
-        target="_blank"
-        className={classes.navLink}
-        >
-          <Done className={classes.icons} /> 
-         Completar Cadastro...
-        </Button>
+        {complete ? '' : (
+           <Button
+           href="/address"
+           color="transparent"
+           target="_blank"
+           className={classes.navLink}
+           >
+             <Done className={classes.icons} /> 
+           Completar Cadastro...
+           </Button>
+        )}
         <Button
           href="/favorites"
           color="transparent"

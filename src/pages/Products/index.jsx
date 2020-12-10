@@ -85,8 +85,15 @@ export default function LoginPage(props) {
   
   const { ...rest } = props;
 
+  const products = [
+    { title: 'Atelier Cabeleireiros'},
+    { title: 'Jacques Janine Sorocaba'},
+    { title: 'Mônica Otacílio Cabeleireiros'},
+    { title: 'Salao da Ana Julia'},
+    { title: "Nunes cabeleireiros"}
+  ];
+
   const services = [
-    { title: 'Escova'},
     { title: 'Corte Feminino'},
     { title: 'Corte Masculino'},
     { title: 'Depilacao'},
@@ -121,7 +128,7 @@ export default function LoginPage(props) {
                 <GridItem xs={12} sm={12} md={4}>
                   <Autocomplete
                       id="filter-demo"
-                      options={services}
+                      options={products}
                       getOptionLabel={(option) => option.title}
                       filterOptions={filterOptions}
                       renderInput={(params) => <TextField {...params} label="Buscar estabelecimentos..." variant="outlined" />}
@@ -152,28 +159,28 @@ export default function LoginPage(props) {
                 <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="4.1/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="4.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Salao da Ana Julia" avaliation="4.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="4.7/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Marias Cabelos" avaliation="4.7/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s1} title="LRO Cabelo Estética" avaliation="4.3/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Nunes cabeleireiros" avaliation="4.3/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s2} title="Atelier Cabeleireiros" avaliation="4.1/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Sonias Depilacao" avaliation="4.1/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s3} title="Jacques Janine Sorocaba" avaliation="3.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Corte e Cia" avaliation="3.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="3.2/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Duetto Cabeleireiros" avaliation="3.2/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="2.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Fio's Cabeleireiros" avaliation="2.5/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <CardShelf img={s4} title="Mônica Otacílio Cabeleireiros" avaliation="2/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
+                <CardShelf img={null} title="Everton Ferrera - Cabeleireiros" avaliation="2/5" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"/>
               </GridItem>
             </GridContainer>
           </div>

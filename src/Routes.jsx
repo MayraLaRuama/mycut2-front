@@ -6,6 +6,7 @@ import Registre from './pages/Registre';
 import Profile from './pages/Profile';
 import Products from './pages/Products'
 import Favorites from './pages/Favorites';
+import Address from './pages/Address';
 
 import LandingPage from './pages/LandingPage';
 
@@ -19,6 +20,7 @@ function Routes() {
             <Route path="/profile" exact component={Profile}></Route>
             <Route path="/products" exact component={Products}></Route>
             <Route path="/favorites" exact component={Favorites}></Route>
+            <Route path="/address" exact component={Address}></Route>
         </BrowserRouter>
     )
 }
