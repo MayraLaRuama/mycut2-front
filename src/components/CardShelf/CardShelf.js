@@ -1,6 +1,7 @@
 import React from "react";
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 // core components
 import Button from "../CustomButtons/Button.js";
 import Slide from "@material-ui/core/Slide";
@@ -127,6 +128,8 @@ export default function Cards(props) {
 
   const [color, setColor] = React.useState('#ccc');
 
+  const history = useHistory();
+
   const hendleFirstLetterName = (name) => {
     return name.charAt(0).toUpperCase();
   }
@@ -134,6 +137,10 @@ export default function Cards(props) {
   const handleClock = () => {
     toast.success('Horario reservado com sucesso, aguarde o contato dos nosso colaborares!!!');
     setModalClock(false);
+  }
+
+  const handleContact = () => {
+     history.push('https://web.whatsapp.com/')
   }
 
   return (
@@ -171,8 +178,8 @@ export default function Cards(props) {
           <IconButton onClick={() => setModal(true)}>
             <InfoIcon />
           </IconButton>
-          <IconButton>
-            <WhatsAppIcon />
+          <IconButton onclick={() => handleContact()}>
+            <WhatsAppIcon  />
           </IconButton>
           <IconButton onClick={() => setModalClock(true)} >
             <QueryBuilderIcon />
